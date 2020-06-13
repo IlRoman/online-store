@@ -1,11 +1,12 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
-import logger from 'redux-logger';
 import productsReducer from './reducers/products';
-import cartReducer from './reducers/cart'
+import cartReducer from './reducers/cart';
+import pageNumberReducer from './reducers/page-number'
 
 const reducers = combineReducers({
     products: productsReducer,
     cart: cartReducer,
+    pageNumber: pageNumberReducer,
 })
 
 const composeEnhancers =
@@ -14,5 +15,4 @@ const composeEnhancers =
 
 export default createStore(
     reducers,
-    composeEnhancers(applyMiddleware(logger)
-    ));
+    composeEnhancers(applyMiddleware()));

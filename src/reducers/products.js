@@ -1,6 +1,7 @@
 const initialState = {
     isLoaded: false,
     products: null,
+    activeFilter: '',
 };
 
 const productsReducer = (state = initialState, action) => {
@@ -16,6 +17,11 @@ const productsReducer = (state = initialState, action) => {
                 ...state,
                 isLoaded: action.payload
             };
+        case 'SET_FILTER':
+            return {
+                ...state,
+                activeFilter: action.payload,
+            }
         default:
             return state;
     }

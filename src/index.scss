@@ -3,11 +3,24 @@
 }
 
 .main {
-  min-height: calc(100vh - 100px);
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin: 10px 15% 20px 15%;
+  width: 90vw;
+  min-height: calc(100vh - 100px);
+  margin: 10px 5vw 20px 5vw;
+}
+
+.products-container {
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+}
+
+.aside {
+  display: flex;
+  justify-content: center;
+  width: 30%;
 }
 
 .x :hover {
@@ -19,23 +32,4 @@
   margin-top: 50px;
   text-align: center;
   color: royalblue;
-}
-
-.page-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-
-  &__button {
-    width: 300px;
-    height: 50px;
-    background-color: grey;
-    color: white;
-    border-radius: 5px;
-    font-size: 2em;
-  }
-
-  &__page-number {
-    font-size: 2em;
-  }
 }
