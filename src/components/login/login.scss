@@ -1,0 +1,35 @@
+.form {
+    width: 100%;
+    min-height: calc(100vh - 100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__container {
+        width: 20%;
+        height: 30%;
+        margin-bottom: 10%;
+
+        &_input {
+            height: 40px;
+            outline: none;
+            border: 1px solid grey;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        &_button {
+            display: block;
+        }
+    }
+}
+
+.login {
+    height: 50px;
+    margin-left: 10%;
+    background-color: teal;
+    outline: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
