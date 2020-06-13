@@ -5,18 +5,15 @@
 
     &__container {
         display: flex;
-        margin-left: 20%;
+        margin-left: 60%;
         color: white;
     }
-    &__exit {
-        line-height: 50px;
-        margin-left: 40%;
-        &_button {
-            background-color: teal;
-            color: white;
-            outline: none;
-            border: none;
-            cursor: pointer;
-        }
+    &__elem {
+        height: 50px;
+        background-color: teal;
+        color: white;
+        outline: none;
+        border: none;
+        cursor: pointer;
     }
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './login.scss'
 
-const Login = ({ verify }) => {
+const Login = ({ login }) => {
     const [loginText, handleLoginText] = useState('')
     const [passwordText, handlePasswordText] = useState('')
 
@@ -34,9 +34,7 @@ const Login = ({ verify }) => {
                 />
                 <button
                     className="form__container_button"
-                    onClick={() => {
-                        verify(loginText, passwordText);
-                    }}
+                    onClick={login}
                 >
                     Войти
                 </button>

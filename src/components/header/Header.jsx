@@ -1,18 +1,20 @@
 import React from 'react';
 import './header.scss';
 
-const Header = () => {
+const Header = ({ isLoggedIn, login }) => {
     return (
         <header className="header">
             <div className="header__container">
-                <button className="header__elem login">Войти в аккаунт</button>
-                {
-                    <div className="header__exit">
-                        <button className="header__exit_button" >
-                            Выйти из Аккаунта
+                {isLoggedIn
+                    ? <button
+                        className="header__elem"
+                        onClick={login}>
+                        Выйти из Аккаунта
                     </button>
-                    </div>
-                }
+                    : <button
+                        className="header__elem">
+                        Войти в аккаунт
+                            </button>}
             </div>
         </header>
     )

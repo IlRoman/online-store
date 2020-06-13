@@ -1,4 +1,15 @@
 .pagination {
     display: flex;
     justify-content: space-around;
+    align-items: center;
+    height: 100px;
+    line-height: 100px;
+    font-size: 30px;
+    color: Green;
+    background-color: yellow;
+
+    &__button {
+        height: 50%;
+        width: 200px;
+    }
 }
