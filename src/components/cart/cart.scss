@@ -1,0 +1,60 @@
+.cart-container {
+    width: 415px;
+    position: absolute;
+    top: 40px;
+    right: 80px;
+    background-color: #dae082;
+    border-radius: 10px;
+    border: 1px solid grey;
+    line-height: 40px;
+    animation: setOpacity 0.5s linear;
+
+    &__elem {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px;
+
+        &_title {
+            font-size: 1.2em;
+            width: 70%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-right: 10px;
+        }
+    }
+
+    &__button {
+        border-radius: 10px;
+        background-color: #f03737;
+        outline: none;
+        color: white;
+        width: 30%;
+        height: 40px;
+    }
+}
+
+.fa-cart-arrow-down {
+    font-size: 2em;
+    margin-right: 5px;
+    line-height: 50px;
+}
+
+.cart-button {
+    width: 200px;
+    height: 50px;
+    color: orange;
+    display: flex;
+    cursor: pointer;
+
+    &__elem {
+        width: 150px;
+        outline: none;
+        border: none;
+        background-color: teal;
+        color: white;
+        line-height: 50px;
+        cursor: pointer;
+        padding-right: 50px;
+    }
+}

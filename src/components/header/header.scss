@@ -5,15 +5,18 @@
 
     &__container {
         display: flex;
-        margin-left: 60%;
-        color: white;
+        justify-content: flex-end;
+        margin-right: 150px;
     }
     &__elem {
         height: 50px;
+        width: 200px;
         background-color: teal;
         color: white;
         outline: none;
         border: none;
+        line-height: 50px;
+        text-align: center;
         cursor: pointer;
     }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import './header.scss';
+import Cart from '../../components/cart/Cart'
 
 const Header = ({ isLoggedIn, login }) => {
     return (
@@ -12,9 +13,11 @@ const Header = ({ isLoggedIn, login }) => {
                         Выйти из Аккаунта
                     </button>
                     : <button
-                        className="header__elem">
+                        className="header__elem"
+                        onClick={login}>
                         Войти в аккаунт
                             </button>}
+                <Cart />
             </div>
         </header>
     )

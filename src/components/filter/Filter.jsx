@@ -1,33 +1,39 @@
 import React from 'react';
 import './filter.scss';
+import { runAnimation } from '../../animations';
 
-const Filter = ({ setFilter }) => {
+const Filter = ({ setSort }) => {
+
+    const handleFilter = type => {
+        runAnimation()
+        setSort(type)
+    }
 
     return (
         <div className="filter">
             <div
                 className="filter__item"
-                onClick={setFilter.bind(this, 'all')}>
+                onClick={() => handleFilter('all')}>
                 Все
             </div>
             <div
                 className="filter__item"
-                onClick={setFilter.bind(this, 'popular')}>
+                onClick={() => handleFilter('popular')}>
                 Популярные
             </div>
             <div
                 className="filter__item"
-                onClick={setFilter.bind(this, 'expensive')}>
+                onClick={() => handleFilter('expensive')}>
                 Цена (Сначала дорогие)
             </div>
             <div
                 className="filter__item"
-                onClick={setFilter.bind(this, 'cheap')}>
+                onClick={() => handleFilter('cheap')}>
                 Цена (Сначала дешевые)
             </div>
             <div
                 className="filter__item"
-                onClick={setFilter.bind(this, 'author')}>
+                onClick={() => handleFilter('author')}>
                 По автору
             </div>
         </div>

@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { setProducts, setFilter } from './actions/products';
+import { setProducts } from './actions/products';
+import { setSort, setSearchQuery } from './actions/filter';
 import { changePageNumber } from './actions/page-number';
 import { login } from './actions/login';
 
-import { filterProducts } from './selectors'
+import { filterProducts, searchQuerySelector } from './selectors'
 
 import axios from 'axios';
 import Header from './components/header/Header';
@@ -13,9 +14,12 @@ import Footer from './components/footer/Footer';
 import Product from './components/product/Product';
 import Filter from './components/filter/Filter'
 import Pagination from './components/pagination/Pagination';
-import Login from './components/login/Login'
+import Login from './components/login/Login';
+import Search from './components/search/Search';
 
-const App = ({ productsList, setProducts, pageNumber, changePageNumber, setFilter, isLoggedIn, login }) => {
+import { runAnimation } from './animations';
+
+const App = ({ setProducts, pageNumber, changePageNumber, setSort, setSearchQuery, isLoggedIn, login, filteredProductsList, searchQuery, addToCart }) => {
 
   useEffect(() => {
     axios.get('/products-list.json')
@@ -24,14 +28,20 @@ const App = ({ productsList, setProducts, pageNumber, changePageNumber, setFilte
       })
   }, [])
 
+  useEffect(() => {
+    if ([...filteredProductsList].splice(pageNumber * 8, 8).length === 0) {
+      changePageNumber(0)
+    }
+  })
+
   const onPrevPage = () => {
-    console.log(pageNumber)
     changePageNumber(pageNumber - 1)
+    runAnimation()
   }
 
   const onNextPage = () => {
-    console.log(pageNumber)
     changePageNumber(pageNumber + 1)
+    runAnimation()
   }
 
   return (
@@ -45,27 +55,34 @@ const App = ({ productsList, setProducts, pageNumber, changePageNumber, setFilte
           ? <Login login={login} />
           : (
             <>
-              <section className="products-container">
+              <section className="products-container animation">
                 <div className="products-container__list">
-                  {!productsList
+                  {!filteredProductsList
                     ? 'Loading...'
-                    : productsList.map((element) => (
-                      <Product
-                        key={element.id}
-                        elem={element}
-                      />
-                    ))}
+                    : [...filteredProductsList]
+                      .splice(pageNumber * 9, 9)
+                      .map((product) => (
+                        <Product
+                          key={product.id}
+                          addToCart={addToCart}
+                          product={product}
+                        />
+                      ))}
                 </div>
                 <Pagination
                   onPrevPage={onPrevPage}
                   onNextPage={onNextPage}
                   pageNumber={pageNumber}
-                  productsList={productsList}
+                  filteredProductsList={filteredProductsList}
                 />
               </section>
-              <aside className="aside">
+              <aside className="aside animation">
+                <Search
+                  setSearchQuery={setSearchQuery}
+                  searchQuery={searchQuery.searchQuery}
+                />
                 <Filter
-                  setFilter={setFilter}
+                  setSort={setSort}
                 />
               </aside>
             </>
@@ -78,7 +95,8 @@ const App = ({ productsList, setProducts, pageNumber, changePageNumber, setFilte
 }
 
 const mapState = state => ({
-  productsList: filterProducts(state),
+  filteredProductsList: filterProducts(state),
+  searchQuery: searchQuerySelector(state),
   isLoaded: state.products.isLoaded,
   pageNumber: state.pageNumber.pageNumber,
   isLoggedIn: state.isLoggedIn.isLoggedIn,
@@ -86,7 +104,8 @@ const mapState = state => ({
 
 const mapDispatch = {
   setProducts,
-  setFilter,
+  setSort,
+  setSearchQuery,
   changePageNumber,
   login,
 }

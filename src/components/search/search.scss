@@ -1,0 +1,26 @@
+.search {
+    margin-top: 10px;
+    width: 300px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    animation: setOpacity 0.5s linear;
+
+    &__input {
+        width: 250px;
+        font-size: 25px;
+        border-radius: 10px;
+        padding-left: 5px;
+        outline: none;
+        border: none;
+    }
+}
+
+.fa-search {
+    line-height: 50px;
+    font-size: 2em;
+    opacity: 0.5;
+    z-index: -1;
+}

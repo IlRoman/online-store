@@ -4,11 +4,12 @@
     height: 350px;
     border: 1px solid lightslategray;
     border-radius: 5px;
-    background-color: lightgrey;
+    background-color: #cce0d2;
     color: black;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    animation: setOpacity 0.5s linear;
 
     &__item {
         margin: 0 15px 0 15px;

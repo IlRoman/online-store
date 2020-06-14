@@ -5,8 +5,8 @@ export const productsSelector = state => {
     return state.products.products;
 }
 
-export const filterTextSelector = state => {
-    return state.products.activeFilter
+export const searchQuerySelector = state => {
+    return state.filterText
 }
 
 export const pageNumberSelector = state => {
@@ -14,23 +14,29 @@ export const pageNumberSelector = state => {
 }
 
 export const filterProducts = createSelector(
-    [productsSelector, filterTextSelector, pageNumberSelector],
-    (productsList, filterText, pageNumber) => {
+    [productsSelector, searchQuerySelector, pageNumberSelector],
+    (productsList, searchQuery, pageNumber) => {
         if (!productsList) return [];
-        let array = [...productsList];
-        switch (filterText) {
+
+        let array = [...productsList]
+            .filter(
+                o =>
+                    o.title.toLowerCase().indexOf(searchQuery.searchQuery.toLowerCase()) >= 0 ||
+                    o.author.toLowerCase().indexOf(searchQuery.searchQuery.toLowerCase()) >= 0);
+
+        switch (searchQuery.sortText) {
             case 'author':
-                return orderBy(array, 'author', 'ask').splice(pageNumber * 8, 8)
+                return orderBy(array, 'author', 'ask')
             case 'all':
-                return array.splice(pageNumber * 8, 8)
+                return array
             case 'popular':
-                return array.sort((a, b) => b.rating - a.rating).splice(pageNumber * 8, 8)
+                return array.sort((a, b) => b.rating - a.rating)
             case 'expensive':
-                return array.sort((a, b) => b.price - a.price).splice(pageNumber * 8, 8)
+                return array.sort((a, b) => b.price - a.price)
             case 'cheap':
-                return array.sort((a, b) => a.price - b.price).splice(pageNumber * 8, 8)
+                return array.sort((a, b) => a.price - b.price)
             default:
-                return array.splice(pageNumber * 8, 8);
+                return array;
         }
     }
 )

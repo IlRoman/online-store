@@ -4,11 +4,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    animation: setOpacity 0.5s linear;
 
     &__container {
         width: 20%;
         height: 30%;
         margin-bottom: 10%;
+
+        &_elem {
+            margin-top: 10px;
+        }
 
         &_input {
             height: 40px;
@@ -19,6 +24,7 @@
         }
 
         &_button {
+            margin-top: 10px;
             display: block;
         }
     }

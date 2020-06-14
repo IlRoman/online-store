@@ -16,7 +16,7 @@ const Login = ({ login }) => {
     return (
         <div className="form">
             <div className="form__container">
-                <p>Логин</p>
+                <p className="form__container_elem">Логин</p>
                 <input
                     type="text"
                     className="form__container_input"
@@ -24,7 +24,7 @@ const Login = ({ login }) => {
                     onChange={handleChangeLoginInput}
                     value={loginText}
                 />
-                <p>Пароль</p>
+                <p className="form__container_elem">Пароль</p>
                 <input
                     type="text"
                     className="form__container_input"
