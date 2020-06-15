@@ -3,7 +3,7 @@ import './product.scss'
 import { connect } from 'react-redux';
 import { addToCart } from '../../actions/cart';
 
-const Product = ({ product, addToCart, addedCount, handleShowDetails }) => {
+const Product = ({ product, addToCart, handleShowDetails }) => {
 
     return (
         <div className="product">
@@ -28,16 +28,15 @@ const Product = ({ product, addToCart, addedCount, handleShowDetails }) => {
                 </div>
                 <button
                     className="product__description_button"
-                    onClick={addToCart.bind(this, product)}>
-                    Добавить в корзину {addedCount > 0 && `(${addedCount})`}
+                    onClick={() => addToCart({ ...product, count: 1 })}>
+                    Добавить в корзину
                 </button>
             </div>
         </div >
     )
 }
 
-const mapState = (state, { product }) => ({
-    addedCount: state.cart.items.reduce((count, book) => count + (book.id === product.id ? 1 : 0), 0)
+const mapState = state => ({
 })
 
 

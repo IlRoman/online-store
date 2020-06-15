@@ -36,8 +36,8 @@ const Details = ({ product, addToCart, addedCount, handleShowDetails }) => {
             <div className="details__container_description-button">
                 <button
                     className="details__container_description-button-elem"
-                    onClick={addToCart.bind(this, product)}>
-                    Добавить в корзину {addedCount > 0 && `(${addedCount})`}
+                    onClick={addToCart.bind(this, { ...product, count: 1 })}>
+                    Добавить в корзину
                 </button>
 
             </div>
@@ -46,7 +46,6 @@ const Details = ({ product, addToCart, addedCount, handleShowDetails }) => {
 }
 
 const mapState = (state, { product }) => ({
-    addedCount: state.cart.items.reduce((count, book) => count + (book.id === product.id ? 1 : 0), 0)
 })
 
 

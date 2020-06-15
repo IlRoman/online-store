@@ -3,6 +3,7 @@ import './cart.scss';
 import { connect } from 'react-redux'
 import { removeFromCart } from '../../actions/cart'
 import uniqBy from 'lodash/uniqBy';
+import { totalPriceSelector } from '../../selectors'
 
 const Cart = ({ totalPrice, count, cart, removeFromCart }) => {
 
@@ -28,6 +29,7 @@ const Cart = ({ totalPrice, count, cart, removeFromCart }) => {
                         : cart.map(elem =>
                             <div className="cart-container__elem" key={elem.id}>
                                 <div className="cart-container__elem_title">{elem.title}</div>
+                                <div className="cart-container__elem_count">{elem.count}</div>
                                 <button
                                     className="cart-container__button"
                                     onClick={() => removeFromCart(elem.id)}
@@ -39,7 +41,7 @@ const Cart = ({ totalPrice, count, cart, removeFromCart }) => {
 }
 
 const mapState = state => ({
-    totalPrice: state.cart.items.reduce((total, book) => total + book.price, 0),
+    totalPrice: totalPriceSelector(state),
     count: state.cart.items.length,
     cart: uniqBy(state.cart.items, o => o.id),
 })

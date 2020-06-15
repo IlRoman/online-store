@@ -5,6 +5,10 @@ export const productsSelector = state => {
     return state.products.products;
 }
 
+export const cartSelector = state => {
+    return state.cart.items
+}
+
 export const searchQuerySelector = state => {
     return state.filterText
 }
@@ -14,8 +18,8 @@ export const pageNumberSelector = state => {
 }
 
 export const filterProducts = createSelector(
-    [productsSelector, searchQuerySelector, pageNumberSelector],
-    (productsList, searchQuery, pageNumber) => {
+    [productsSelector, searchQuerySelector],
+    (productsList, searchQuery) => {
         if (!productsList) return [];
 
         let array = [...productsList]
@@ -38,5 +42,17 @@ export const filterProducts = createSelector(
             default:
                 return array;
         }
+    }
+)
+
+export const totalPriceSelector = createSelector(
+    [cartSelector],
+    (productsList) => {
+        if (!productsList || productsList.length === 0) return 0;
+        return productsList.reduce((acc, item) => {
+            return item.hasOwnProperty('count')
+                ? acc + item.price * item.count
+                : acc + item.price
+        }, 0)
     }
 )
