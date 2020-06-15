@@ -8,7 +8,7 @@ import { login } from './actions/login';
 
 import { filterProducts, searchQuerySelector } from './selectors'
 
-import axios from 'axios';
+// import axios from 'axios';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import Product from './components/product/Product';
@@ -17,8 +17,8 @@ import Pagination from './components/pagination/Pagination';
 import Login from './components/login/Login';
 import Search from './components/search/Search';
 import Details from './components/details/Details';
-import Slider from './components/slider/Slider'
 
+import { productsList } from './products-list'
 import { runAnimation } from './animations';
 
 const App = ({ setProducts, pageNumber, changePageNumber, setSort, setSearchQuery, isLoggedIn, login, filteredProductsList, searchQuery, addToCart }) => {
@@ -31,11 +31,15 @@ const App = ({ setProducts, pageNumber, changePageNumber, setSort, setSearchQuer
     changeProductDetails(product)
   }
 
+  // useEffect(() => {
+  //   axios.get('../products-list.json')
+  //     .then(response => {
+  //       setProducts(response.data)
+  //     })
+  // }, [])
+
   useEffect(() => {
-    axios.get('../products-list.json')
-      .then(response => {
-        setProducts(response.data)
-      })
+    setProducts(productsList)
   }, [])
 
   useEffect(() => {
