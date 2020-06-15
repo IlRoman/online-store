@@ -11,6 +11,7 @@ const Filter = ({ setSort }) => {
 
     return (
         <div className="filter">
+            <h2>Фильтрации</h2>
             <div
                 className="filter__item"
                 onClick={() => handleFilter('all')}>

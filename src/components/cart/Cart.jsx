@@ -23,14 +23,16 @@ const Cart = ({ totalPrice, count, cart, removeFromCart }) => {
             </div>
             {cartIsVisible &&
                 <div className='cart-container'>
-                    {cart.map(elem =>
-                        <div className="cart-container__elem">
-                            <div className="cart-container__elem_title">{elem.title}</div>
-                            <button
-                                className="cart-container__button"
-                                onClick={() => removeFromCart(elem.id)}
-                            >Удалить</button>
-                        </div>)}
+                    {cart.length === 0
+                        ? <h2>Корзина пуста</h2>
+                        : cart.map(elem =>
+                            <div className="cart-container__elem" key={elem.id}>
+                                <div className="cart-container__elem_title">{elem.title}</div>
+                                <button
+                                    className="cart-container__button"
+                                    onClick={() => removeFromCart(elem.id)}
+                                >Удалить</button>
+                            </div>)}
                 </div>}
         </>
     )

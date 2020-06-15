@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { setProducts } from './actions/products';
@@ -16,10 +16,20 @@ import Filter from './components/filter/Filter'
 import Pagination from './components/pagination/Pagination';
 import Login from './components/login/Login';
 import Search from './components/search/Search';
+import Details from './components/details/Details';
+import Slider from './components/slider/Slider'
 
 import { runAnimation } from './animations';
 
 const App = ({ setProducts, pageNumber, changePageNumber, setSort, setSearchQuery, isLoggedIn, login, filteredProductsList, searchQuery, addToCart }) => {
+
+  const [details, showDetails] = useState(false)
+  const [productDetails, changeProductDetails] = useState([])
+
+  const handleShowDetails = (product) => {
+    showDetails(!details)
+    changeProductDetails(product)
+  }
 
   useEffect(() => {
     axios.get('/products-list.json')
@@ -29,7 +39,7 @@ const App = ({ setProducts, pageNumber, changePageNumber, setSort, setSearchQuer
   }, [])
 
   useEffect(() => {
-    if ([...filteredProductsList].splice(pageNumber * 8, 8).length === 0) {
+    if ([...filteredProductsList].splice(pageNumber * 6, 6).length === 0) {
       changePageNumber(0)
     }
   })
@@ -51,30 +61,34 @@ const App = ({ setProducts, pageNumber, changePageNumber, setSort, setSearchQuer
         login={login}
       />
       <main className="main">
+        {/* <Slider /> */}
+        {details && <Details product={productDetails} handleShowDetails={handleShowDetails} />}
         {!isLoggedIn
           ? <Login login={login} />
           : (
             <>
               <section className="products-container animation">
                 <div className="products-container__list">
-                  {!filteredProductsList
-                    ? 'Loading...'
+                  {filteredProductsList.length === 0
+                    ? <div className="no-results">Ничего не найдено</div>
                     : [...filteredProductsList]
-                      .splice(pageNumber * 9, 9)
+                      .splice(pageNumber * 6, 6)
                       .map((product) => (
                         <Product
                           key={product.id}
                           addToCart={addToCart}
                           product={product}
+                          handleShowDetails={handleShowDetails}
                         />
                       ))}
                 </div>
-                <Pagination
-                  onPrevPage={onPrevPage}
-                  onNextPage={onNextPage}
-                  pageNumber={pageNumber}
-                  filteredProductsList={filteredProductsList}
-                />
+                {filteredProductsList.length !== 0 &&
+                  <Pagination
+                    onPrevPage={onPrevPage}
+                    onNextPage={onNextPage}
+                    pageNumber={pageNumber}
+                    filteredProductsList={filteredProductsList}
+                  />}
               </section>
               <aside className="aside animation">
                 <Search

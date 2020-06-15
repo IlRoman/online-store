@@ -3,7 +3,7 @@ import './product.scss'
 import { connect } from 'react-redux';
 import { addToCart } from '../../actions/cart';
 
-const Product = ({ product, addToCart, addedCount }) => {
+const Product = ({ product, addToCart, addedCount, handleShowDetails }) => {
 
     return (
         <div className="product">
@@ -12,6 +12,7 @@ const Product = ({ product, addToCart, addedCount }) => {
                     src={product.image}
                     alt={product.title}
                     className="product__image-container_image"
+                    onClick={() => handleShowDetails(product)}
                 />
             </div>
             <div className="product__description">

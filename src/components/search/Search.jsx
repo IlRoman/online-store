@@ -1,7 +1,13 @@
 import React from 'react';
 import './search.scss'
+import { runAnimation } from '../../animations'
 
 const Search = ({ setSearchQuery, searchQuery }) => {
+
+    const handleChange = (e) => {
+        setSearchQuery(e.target.value)
+        runAnimation()
+    }
 
     return (
         <div className="search">
@@ -9,7 +15,7 @@ const Search = ({ setSearchQuery, searchQuery }) => {
                 className="search__input"
                 type="text"
                 placeholder="введите запрос..."
-                onChange={e => setSearchQuery(e.target.value)}
+                onChange={handleChange}
                 value={searchQuery} />
             <i className="fas fa-search"></i>
         </div>
