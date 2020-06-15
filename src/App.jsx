@@ -32,7 +32,7 @@ const App = ({ setProducts, pageNumber, changePageNumber, setSort, setSearchQuer
   }
 
   useEffect(() => {
-    axios.get('/products-list.json')
+    axios.get('../products-list.json')
       .then(response => {
         setProducts(response.data)
       })
